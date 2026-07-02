@@ -1,18 +1,18 @@
 # 📡 Universe Playlist
 
-**595 free live-streaming channels, organized and ready to watch.**
+**633 free live-streaming channels, organized and ready to watch.**
 
 A single-page channel guide with real-time search, category filtering, and direct stream links — built to be hosted free on GitHub Pages.
 
 [![Live Demo](https://img.shields.io/badge/Live_Demo-Universe_Playlist-3b82f6?style=for-the-badge)](https://greyhammond.github.io/UniversalTVPlaylist/)
-[![Channels](https://img.shields.io/badge/Channels-595-22d3ee?style=for-the-badge)](#categories)
+[![Channels](https://img.shields.io/badge/Channels-633-22d3ee?style=for-the-badge)](#categories)
 [![License](https://img.shields.io/badge/License-MIT-22c55e?style=for-the-badge)](LICENSE)
 
 ---
 
 ## What Is This?
 
-A curated playlist of 595 free, publicly available live streams — TV shows, movies, music videos, news, sports, and more — organized into browsable categories with a clean dark-themed interface.
+A curated playlist of 633 free, publicly available live streams — TV shows, movies, music videos, news, sports, and more — organized into browsable categories with a clean dark-themed interface.
 
 No apps to install. No accounts to create. No subscriptions. Just click a channel and watch.
 
