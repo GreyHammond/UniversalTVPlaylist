@@ -1,72 +1,71 @@
 # 📡 Channel Guide
 
-**633 channels** organized into 6 categories with subcategories.
+**661 channels** organized into 6 categories with subcategories.
 
 ---
 
 ## 📋 Table of Contents
 
-**📺 [TV (427 channels)](#-tv-427-channels)**
+**📺 [TV (443 channels)](#-tv-443-channels)**
 
   - Local TV (54)
   - Kids (38)
   - Animated (13)
   - K-Drama & International (13)
-  - True Crime (30)
-  - Sci-Fi (18)
-  - Reality (50)
-  - Comedy (24)
+  - True Crime (31)
+  - Sci-Fi (21)
+  - Reality (52)
+  - Comedy (26)
   - Drama (20)
-  - Food (15)
-  - Home & Garden (15)
-  - History (25)
-  - Science (20)
-  - Travel (19)
+  - Food (19)
+  - Home & Garden (16)
+  - History (28)
+  - Science (21)
+  - Travel (20)
   - Outdoors (10)
   - Automotive (8)
   - Creators (9)
   - En Español (13)
   - Medical (4)
   - Westerns (5)
-  - General (18)
-  - Other (6)
+  - General (22)
 
-**🎬 [MOVIES (37 channels)](#-movies-37-channels)**
+**🎬 [MOVIES (39 channels)](#-movies-39-channels)**
 
-  - General (20)
+  - General (22)
   - Classics (7)
   - Romance (3)
   - International (5)
   - Sci-Fi (1)
   - Other (1)
 
-**🎵 [MUSIC (31 channels)](#-music-31-channels)**
+**🎵 [MUSIC (34 channels)](#-music-34-channels)**
 
   - By Decade (7)
-  - By Genre (18)
+  - By Genre (21)
   - Latin & K-Pop (5)
   - Talk & Radio (1)
 
-**📰 [NEWS (53 channels)](#-news-53-channels)**
+**📰 [NEWS (58 channels)](#-news-58-channels)**
 
-  - National (11)
+  - National (14)
   - Local (9)
-  - Business (10)
+  - Business (11)
   - Weather (6)
-  - Politics (10)
+  - Politics (11)
   - Crime (5)
   - En Español (2)
 
-**🏆 [SPORTS (63 channels)](#-sports-63-channels)**
+**🏆 [SPORTS (65 channels)](#-sports-65-channels)**
 
   - Major Leagues (8)
   - Combat (7)
-  - Motorsports (6)
+  - Motorsports (7)
   - Golf & Racquet (5)
   - Soccer (5)
   - College (6)
   - Networks (16)
-  - Other Sports (10)
+  - Other Sports (11)
 
 **🔮 [OTHER (22 channels)](#-other-22-channels)**
 
@@ -79,7 +78,7 @@
 
 ---
 
-## 📺 TV (427 channels)
+## 📺 TV (443 channels)
 
 ### Local TV (54)
 
@@ -211,9 +210,10 @@
 - Series K Heart (1080p)
 - Series K Legacy (1080p)
 
-### True Crime (30)
+### True Crime (31)
 
 - 21 Jump Street (720p)
+- 48 Hours (1080p)
 - A&E Crime 360 (720p)
 - Acorn TV Mysteries (720p)
 - American Crimes (1080p) [Geo-blocked]
@@ -244,16 +244,19 @@
 - Unsolved Mysteries (720p)
 - Witness to Justice (720p)
 
-### Sci-Fi (18)
+### Sci-Fi (21)
 
 - Alien Nation by DUST 1 (Tubi)
 - Alien Nation by DUST 2
 - Ancient Aliens (720p) [Geo-blocked]
 - BBC Doctor Who Classic (1080p)
+- Charge! (1080p)
+- Comet (1080p)
 - Doctor Who Classic (1080p)
 - Ghost Stories (720p)
 - Haunt TV 1 (Tubi)
 - Haunt TV 2
+- Roar TBD (1080p)
 - Star Trek: Deep Space Nine
 - Star Trek: The Next Generation
 - Star Trek: Voyager
@@ -265,13 +268,14 @@
 - UnXplained Zone (720p)
 - Van Helsing (1080p)
 
-### Reality (50)
+### Reality (52)
 
 - 60 Days In by A&E (720p)
 - All Out Reality (1080p)
 - All Reality We TV (720p) [Geo-blocked]
 - All Weddings We TV (720p) [Geo-blocked]
 - AMC Absolute Reality
+- America's Got Talent (720p)
 - Baywatch 1 (Roku)
 - Baywatch 2 (Tubi)
 - Baywatch 3
@@ -297,6 +301,7 @@
 - Impossible Quiz Show (1080p)
 - Intervention by A&E (1080p) [Geo-blocked]
 - Kitchen Nightmares (720p) [Geo-blocked]
+- Let's Make A Deal Classic (1080p)
 - Little Women LA (1080p) [Geo-blocked]
 - Matched Married Meet (1080p) [Geo-blocked]
 - Million Dollar Dream Home (1080p) [Geo-blocked]
@@ -318,7 +323,7 @@
 - Wipeout Xtra 1 (Tubi)
 - Wipeout Xtra 2
 
-### Comedy (24)
+### Comedy (26)
 
 - AFV with Alfonso Ribeiro (1080p)
 - Always Funny Videos 1 (Tubi)
@@ -331,6 +336,7 @@
 - Comedy Central Pluto TV
 - Comedy Dynamics 1 (Tubi)
 - Comedy Dynamics 2
+- Conan O'Brien TV (1080p) [Geo-blocked]
 - Dry Bar Comedy (720p)
 - Just for Laughs GAGS (720p)
 - Laff More (1080p)
@@ -341,6 +347,7 @@
 - Portlandia (720p)
 - RiffTrax (720p)
 - Sitcom Legends
+- SNL Vault (1080p)
 - The Carol Burnett Show (720p)
 - The Johnny Carson Show (720p)
 - TV Land Sitcoms
@@ -368,15 +375,19 @@
 - Shades of Black (1080p) [Geo-blocked]
 - Tiny House Nation (720p) [Geo-blocked]
 
-### Food (15)
+### Food (19)
 
+- America's Test Kitchen 1
+- America's Test Kitchen 2 (Tubi)
 - BBC Food (1080p)
 - bon appétit (1080p)
 - BuzzFeed Tasty (1080p)
+- Cooking Panda (576p)
 - Drool (1080p)
 - Emeril Lagasse Channel (1080p)
 - Gordon Ramsay (720p)
 - Gusto TV (720p)
+- Hell's Kitchen (1080p) [Geo-blocked]
 - Hot Ones (1080p)
 - Hungry (720p)
 - Jamie Oliver (1080p) [Geo-blocked]
@@ -386,7 +397,7 @@
 - Tastemade Home (1080p)
 - The Martha Stewart Channel (1080p)
 
-### Home & Garden (15)
+### Home & Garden (16)
 
 - At Home with Family Handyman (720p)
 - BBC Home & Garden (1080p)
@@ -399,12 +410,13 @@
 - NBC LX Home (1080p)
 - The Bob Ross Channel (720p) [Geo-blocked]
 - The Design Network (1080p)
+- The Nest (1080p)
 - TheSorryGirls TV (1080p)
 - This Old House 1 (Roku)
 - This Old House 2
 - This Old House Makers (1080p)
 
-### History (25)
+### History (28)
 
 - Alone By History (720p)
 - American Pickers by History (1080p) [Geo-blocked]
@@ -415,6 +427,7 @@
 - Documentary+ (1080p)
 - Duck Dynasty 1 (Tubi)
 - Duck Dynasty 2
+- FNX First Nations Experience (1080p)
 - Historia (1080p)
 - History & Warfare Now (1080p)
 - History 365 (1080p) [Geo-blocked]
@@ -426,14 +439,17 @@
 - Military Heroes (1080p)
 - Modern Marvels Presented by History (720p) [Geo-blocked]
 - Pluto TV History
+- Story Television
 - TED (1080p)
 - VICE (1080p)
+- World Channel (1080p)
 - Xplore 1 (Tubi)
 - Xplore 2
 - Xtreme Outdoor Presented by HISTORY (720p)
 
-### Science (20)
+### Science (21)
 
+- AKC TV Puppies 24/7
 - BBC Earth (1080p)
 - BBC Earth 1 (Tubi)
 - BBC Earth 2
@@ -455,11 +471,12 @@
 - The Pet Collective (1080p) [Geo-blocked]
 - WildEarth (1080p)
 
-### Travel (19)
+### Travel (20)
 
 - Antiques Road Trip (720p)
 - Antiques Roadshow UK 1 (Roku)
 - Antiques Roadshow UK 2
+- Beach TV Panama City (720p)
 - BuzzFeed Celeb (1080p)
 - BuzzFeed Unsolved (1080p)
 - Her Sphere (720p) [Geo-blocked]
@@ -544,15 +561,18 @@
 - Western Bound (1080p) [Geo-blocked]
 - Wild West TV (1080p) [Geo-blocked]
 
-### General (18)
+### General (22)
 
 - 4UV (1080p)
 - ABC 20/20 (1080p)
+- AfroLandTV (1080p)
 - Backstage (1080p)
 - BUZZR (720p)
 - Circle - Roku
 - Circle - Samsung TV+
+- Classic Arts Showcase (720p)
 - Classic TV: Families
+- Cloudflare TV (720p)
 - Degrassi (720p)
 - ElectricNOW (1080p) [Geo-blocked]
 - Envoy FAST (720p) [Geo-blocked]
@@ -560,32 +580,26 @@
 - MTV Pluto TV
 - RIG TV (1080p)
 - Shout! TV (1080p)
+- Timeless TV
 - TODAY All Day 1 (Tubi)
 - TODAY All Day 2
 - TruBlu (720p)
 - Wonder (1080p)
 
-### Other (6)
-
-- America's Got Talent (720p)
-- America's Test Kitchen 1
-- America's Test Kitchen 2 (Tubi)
-- Conan O'Brien TV (1080p) [Geo-blocked]
-- Hell's Kitchen (1080p) [Geo-blocked]
-- Let's Make A Deal Classic (1080p)
-
 ---
 
-## 🎬 MOVIES (37 channels)
+## 🎬 MOVIES (39 channels)
 
-### General (20)
+### General (22)
 
 - Gravitas Movies (1080p)
 - Hallmark Movies & More (1080p) [Geo-blocked]
+- Magnificent Movies Network
 - Maverick Black Cinema - Roku
 - Maverick Black Cinema - Samsung TV+
 - Maverick Black Cinema - Tubi
 - Miramax Channel (1080p) [Geo-blocked]
+- Movies! (576p)
 - MovieSphere 1 (Tubi)
 - MovieSphere 2
 - MyTime Movie Network (1080p)
@@ -635,7 +649,7 @@
 
 ---
 
-## 🎵 MUSIC (31 channels)
+## 🎵 MUSIC (34 channels)
 
 ### By Decade (7)
 
@@ -647,17 +661,20 @@
 - XITE 80s Flashback (1080p)
 - XITE 90s Throwback (1080p)
 
-### By Genre (18)
+### By Genre (21)
 
 - 30A Music (720p)
 - Billboard TV (1080p)
+- CMC California Music Channel (1080p)
 - MTV Biggest Pop (1080p)
+- The Country Network (1080p)
 - Vevo Country (1080p) [Geo-blocked]
 - Vevo Country Rewind (1080p)
 - Vevo Hip Hop (1080p)
 - Vevo Pop (1080p)
 - Vevo R&B (1080p)
 - Vevo Retro Rock (1080p)
+- Whiplash (720p)
 - XITE Celebrates (1080p)
 - XITE Christian Hits (1080p)
 - XITE Classic Country (1080p) [Geo-blocked]
@@ -682,9 +699,9 @@
 
 ---
 
-## 📰 NEWS (53 channels)
+## 📰 NEWS (58 channels)
 
-### National (11)
+### National (14)
 
 - ABC News Live 1 (Tubi)
 - ABC News Live 2
@@ -695,6 +712,9 @@
 - LiveNOW from FOX (1080p) [Geo-blocked]
 - NBC News Now 1 (Tubi)
 - NBC News Now 2
+- NBCLX (1080p)
+- Newsy (1080p)
+- NTD TV English (720p)
 - Scripps News 1 (Tubi)
 - Scripps News 2
 
@@ -710,8 +730,9 @@
 - WBTV News (720p)
 - WeatherNation Charlotte (720p)
 
-### Business (10)
+### Business (11)
 
+- Biz TV (1080p)
 - Bloomberg Originals - Samsung TV+
 - Bloomberg Originals - Tubi
 - Bloomberg TV+ (2160p)
@@ -732,10 +753,11 @@
 - FOX Weather 2 (Tubi)
 - WeatherSpy (720p)
 
-### Politics (10)
+### Politics (11)
 
 - Court TV 1 (Tubi)
 - Court TV 2
+- Free Speech TV (720p)
 - Newsmax 2 - Roku
 - Newsmax 2 - Samsung TV+
 - OAN (1080p)
@@ -760,7 +782,7 @@
 
 ---
 
-## 🏆 SPORTS (63 channels)
+## 🏆 SPORTS (65 channels)
 
 ### Major Leagues (8)
 
@@ -783,7 +805,7 @@
 - UFC 2
 - WWE Superstar Central (1080p)
 
-### Motorsports (6)
+### Motorsports (7)
 
 - MotoGP Channel (1080p)
 - Nascar (1080p) [Geo-blocked]
@@ -791,6 +813,7 @@
 - NHRA TV 1 (Tubi)
 - NHRA TV 2
 - RACER Select (1080p)
+- Rally TV (1080p)
 
 ### Golf & Racquet (5)
 
@@ -836,9 +859,10 @@
 - Women's Sports Network 2
 - Yahoo! Sports Network (1080p)
 
-### Other Sports (10)
+### Other Sports (11)
 
 - Billiard TV (1080p) [Geo-blocked]
+- Duck Hunting TV (1080p)
 - Overtime (1080p)
 - PLL Network (1080p)
 - RugbyPass TV (720p)
@@ -895,4 +919,4 @@
 
 ---
 
-*Total: 633 channels*
+*Total: 661 channels*
