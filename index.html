@@ -478,6 +478,64 @@
     display: none;
   }
 
+  .player-links {
+    display: none;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 0.8rem;
+    border-top: 1px solid var(--border);
+    background: var(--bg-card);
+    border-radius: 0 0 12px 12px;
+  }
+  .player-links.active { display: flex; }
+  .player-url {
+    flex: 1;
+    min-width: 0;
+    padding: 0.35rem 0.6rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--bg-deep);
+    color: var(--text-dim);
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    user-select: all;
+    cursor: text;
+  }
+  .player-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.35rem 0.65rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--bg-panel);
+    color: var(--text-secondary);
+    font-size: 0.68rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+    text-decoration: none;
+  }
+  .player-link-btn:hover {
+    background: var(--accent-blue);
+    border-color: var(--accent-blue);
+    color: #fff;
+  }
+  .player-link-btn.copied {
+    background: #22c55e;
+    border-color: #22c55e;
+    color: #fff;
+  }
+  .player-link-btn svg {
+    width: 12px;
+    height: 12px;
+    fill: currentColor;
+  }
+
   .list-header {
     max-width: 720px;
     margin: 0 auto;
@@ -719,6 +777,21 @@
       <div class="player-error" id="playerError">Stream unavailable</div>
     </div>
     <div class="player-meta" id="playerMeta"></div>
+    <div class="player-links" id="playerLinks">
+      <div class="player-url" id="playerUrl" title="Stream URL"></div>
+      <button class="player-link-btn" id="copyBtn" onclick="copyStreamUrl()">
+        <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+        Copy
+      </button>
+      <a class="player-link-btn" id="downloadBtn" href="#" download="stream.m3u8">
+        <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+        Download
+      </a>
+      <a class="player-link-btn" id="openBtn" href="#" target="_blank" rel="noopener" title="Open in new tab">
+        <svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+        Open
+      </a>
+    </div>
   </div>
 </div>
 
@@ -981,10 +1054,33 @@ const playerLoading = document.getElementById('playerLoading');
 const playerError = document.getElementById('playerError');
 const playerMeta = document.getElementById('playerMeta');
 const playerClose = document.getElementById('playerClose');
+const playerLinks = document.getElementById('playerLinks');
+const playerUrl = document.getElementById('playerUrl');
+const downloadBtn = document.getElementById('downloadBtn');
+const openBtn = document.getElementById('openBtn');
 let currentHls = null;
+let currentStreamUrl = '';
+
+function copyStreamUrl() {
+  navigator.clipboard.writeText(currentStreamUrl).then(function() {
+    const btn = document.getElementById('copyBtn');
+    btn.classList.add('copied');
+    btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Copied!';
+    setTimeout(function() {
+      btn.classList.remove('copied');
+      btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg> Copy';
+    }, 2000);
+  });
+}
 
 function playChannel(name, url, subcategory) {
+  currentStreamUrl = url;
   playerWrap.classList.add('active');
+  playerLinks.classList.add('active');
+  playerUrl.textContent = url;
+  playerUrl.title = url;
+  downloadBtn.href = url;
+  openBtn.href = url;
   playerLoading.style.display = 'block';
   playerError.style.display = 'none';
   playerMeta.innerHTML = '';
@@ -1082,9 +1178,11 @@ function updateMeta(text, resMatch, subcategory) {
 
 playerClose.addEventListener('click', function() {
   playerWrap.classList.remove('active');
+  playerLinks.classList.remove('active');
   if (currentHls) { currentHls.destroy(); currentHls = null; }
   playerVideo.src = '';
   playerVideo.pause();
+  currentStreamUrl = '';
 });
 </script>
 </body>
