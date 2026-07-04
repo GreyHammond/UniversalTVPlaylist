@@ -258,7 +258,11 @@ function renderCatBar() {
   for(var i=0;i<cats.length;i++){var cat=cats[i]; if(!DATA[cat])continue; var count=0; for(var s in DATA[cat]) count+=DATA[cat][s].length;
     html+='<button class="cat-btn '+(activeCat===cat?'active':'')+'" data-cat="'+cat+'"><span class="icon">'+CAT_META[cat].icon+'</span> '+CAT_META[cat].label+' <span class="badge">'+count+'</span></button>';}
   bar.innerHTML=html;
-  bar.querySelectorAll('.cat-btn').forEach(function(btn){btn.addEventListener('click',function(){activeCat=btn.dataset.cat==='ALL'?null:btn.dataset.cat;activeSub=null;renderCatBar();renderSubBar();renderList();});});
+  bar.querySelectorAll('.cat-btn').forEach(function(btn){btn.addEventListener('click',function(){activeCat=btn.dataset.cat==='ALL'?null:btn.dataset.cat;activeSub=null;renderCatBar();renderSubBar();renderList();
+document.getElementById('channelList').addEventListener('click',function(e){
+  var item=e.target.closest('.channel-item');
+  if(item&&item.dataset.url){playChannel(item.dataset.chname,item.dataset.url,item.dataset.sub);}
+});});});
 }
 function renderSubBar() {
   var bar=document.getElementById('subBar');
@@ -291,8 +295,8 @@ function renderList() {
   for(var k=0;k<sortedKeys.length;k++){var key=sortedKeys[k],items=groups.get(key);
     html+='<div class="group-label">'+key+' \u00b7 '+items.length+'</div>';
     for(var j=0;j<items.length;j++){var ch=items[j],p=parseName(ch.name),ab=abbrev(p.name);
-      var safeUrl=ch.url.replace(/'/g,"\\'"),safeName=ch.name.replace(/'/g,"\\'"),safeSub=ch.subcategory.replace(/'/g,"\\'");
-      html+='<div class="channel-item" onclick="playChannel(\''+safeName+'\',\''+safeUrl+'\',\''+safeSub+'\')">'
+      var esc=function(s){return s.replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");};
+      html+='<div class="channel-item" data-url="'+esc(ch.url)+'" data-chname="'+esc(ch.name)+'" data-sub="'+esc(ch.subcategory)+'">'
         +'<div class="ch-icon">'+ab+'</div><div class="ch-info"><div class="ch-name">'+p.name+'</div><div class="ch-meta">'
         +(p.res?'<span class="ch-res">'+p.res+'</span>':'')+'<span class="ch-tag">'+ch.subcategory+'</span>'
         +(p.geo?'<span class="ch-geo">Geo-blokkert</span>':'')+'</div></div>'
@@ -302,6 +306,10 @@ function renderList() {
 document.getElementById('search').addEventListener('input',function(e){searchQuery=e.target.value;if(searchQuery.trim()){activeCat=null;activeSub=null;renderCatBar();renderSubBar();}renderList();});
 window.addEventListener('scroll',function(){document.getElementById('btt').classList.toggle('visible',window.scrollY>600);});
 renderCatBar();renderSubBar();renderList();
+document.getElementById('channelList').addEventListener('click',function(e){
+  var item=e.target.closest('.channel-item');
+  if(item&&item.dataset.url){playChannel(item.dataset.chname,item.dataset.url,item.dataset.sub);}
+});
 </script>
 <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.17/dist/hls.min.js"></script>
 <script>
