@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Universe Spilleliste - Norge</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg-deep: #0a0e1a;
+    --bg-panel: #111827;
+    --bg-card: #1a2236;
+    --bg-hover: #243050;
+    --accent-blue: #3b82f6;
+    --accent-cyan: #22d3ee;
+    --accent-red: #ef4444;
+    --accent-purple: #a855f7;
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --text-dim: #64748b;
+    --border: #1e293b;
+    --glow: rgba(59, 130, 246, 0.15);
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg-deep);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .header { text-align: center; padding: 2rem 1rem 1rem; position: relative; }
+  .header::after {
+    content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 80%; max-width: 600px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent-red), transparent);
+  }
+  .header h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.6rem, 5vw, 2.4rem); font-weight: 700;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    background: linear-gradient(135deg, var(--text-primary), var(--accent-red));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .header .flag { font-size: clamp(1.2rem, 4vw, 1.8rem); }
+  .header .count { font-size: 0.8rem; color: var(--text-dim); margin-top: 0.3rem; letter-spacing: 0.08em; text-transform: uppercase; }
+
+  .lang-switch {
+    display: inline-flex; align-items: center; gap: 0.35rem; margin-top: 0.5rem;
+    padding: 0.35rem 0.8rem; border: 1px solid var(--accent-red); border-radius: 6px;
+    background: rgba(239,68,68,0.1); color: var(--accent-red);
+    font-size: 0.72rem; font-weight: 700; text-decoration: none;
+    text-transform: uppercase; letter-spacing: 0.06em; transition: all 0.2s;
+  }
+  .lang-switch:hover { background: var(--accent-red); color: #fff; }
+
+  .gh-link {
+    display: inline-flex; align-items: center; gap: 0.3rem;
+    margin-top: 0.5rem; margin-left: 0.4rem; padding: 0.35rem 0.7rem;
+    border: 1px solid var(--border); border-radius: 6px;
+    background: var(--bg-panel); color: var(--text-dim);
+    font-size: 0.7rem; font-weight: 600; text-decoration: none; transition: all 0.2s;
+  }
+  .gh-link:hover { color: var(--text-primary); border-color: var(--text-dim); background: var(--bg-hover); }
+
+  .help-banner { max-width: 720px; margin: 1rem auto 0; padding: 0 1rem; }
+  .help-toggle {
+    display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+    width: 100%; padding: 0.5rem 1rem; border: 1px solid var(--border); border-radius: 10px;
+    background: var(--bg-panel); color: var(--accent-cyan); font-size: 0.78rem; font-weight: 600;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .help-toggle:hover { background: var(--bg-hover); border-color: var(--accent-cyan); }
+  .help-toggle .arrow { transition: transform 0.25s; font-size: 0.65rem; }
+  .help-toggle.open .arrow { transform: rotate(180deg); }
+  .help-content { overflow: hidden; max-height: 0; opacity: 0; transition: max-height 0.35s ease, opacity 0.25s ease, margin 0.25s ease; margin-top: 0; }
+  .help-content.open { max-height: 320px; opacity: 1; margin-top: 0.6rem; }
+  .help-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.2rem; }
+  .help-card p { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 0.8rem; }
+  .help-card p strong { color: var(--text-primary); }
+  .help-card .vlc-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.45rem; }
+  .vlc-links { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+  .vlc-links a { display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.4rem 0.8rem; border: 1px solid var(--border); border-radius: 6px; background: var(--bg-panel); color: var(--text-primary); font-size: 0.75rem; font-weight: 600; text-decoration: none; transition: all 0.15s; }
+  .vlc-links a:hover { background: var(--accent-blue); border-color: var(--accent-blue); color: #fff; }
+
+  .search-wrap { max-width: 720px; margin: 1.2rem auto 0; padding: 0 1rem; position: relative; }
+  .search-wrap input { width: 100%; padding: 0.65rem 1rem 0.65rem 2.6rem; border: 1px solid var(--border); border-radius: 10px; background: var(--bg-panel); color: var(--text-primary); font-size: 0.9rem; outline: none; transition: border-color 0.2s; }
+  .search-wrap input:focus { border-color: var(--accent-red); box-shadow: 0 0 0 3px rgba(239,68,68,0.15); }
+  .search-wrap::before { content: '\2315'; position: absolute; left: 1.8rem; top: 50%; transform: translateY(-50%); color: var(--text-dim); font-size: 1.1rem; pointer-events: none; }
+
+  .cat-bar { display: flex; justify-content: center; gap: 0.45rem; padding: 1.2rem 0.8rem 0.6rem; flex-wrap: wrap; max-width: 720px; margin: 0 auto; }
+  .cat-btn { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.5rem 1rem; border: 1px solid var(--border); border-radius: 8px; background: var(--bg-panel); color: var(--text-secondary); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; user-select: none; }
+  .cat-btn:hover { background: var(--bg-hover); color: var(--text-primary); border-color: var(--accent-red); }
+  .cat-btn.active { background: var(--accent-red); color: #fff; border-color: var(--accent-red); box-shadow: 0 2px 12px rgba(239,68,68,0.3); }
+  .cat-btn .icon { font-size: 1rem; } .cat-btn .badge { background: rgba(255,255,255,0.15); padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.65rem; font-weight: 700; }
+  .cat-btn.active .badge { background: rgba(255,255,255,0.25); }
+
+  .subcat-bar { max-width: 720px; margin: 0 auto; padding: 0.3rem 0.8rem 0.8rem; display: flex; gap: 0.35rem; flex-wrap: wrap; justify-content: center; min-height: 0; overflow: hidden; transition: opacity 0.25s, max-height 0.35s; }
+  .subcat-bar.hidden { opacity: 0; max-height: 0; padding: 0 0.8rem; }
+  .sub-btn { padding: 0.35rem 0.75rem; border: 1px solid var(--border); border-radius: 20px; background: var(--bg-card); color: var(--text-dim); font-size: 0.7rem; font-weight: 600; cursor: pointer; transition: all 0.2s; user-select: none; white-space: nowrap; }
+  .sub-btn:hover { background: var(--bg-hover); color: var(--text-primary); border-color: var(--text-dim); }
+  .sub-btn.active { background: var(--accent-cyan); color: var(--bg-deep); border-color: var(--accent-cyan); }
+
+  .player-wrap { max-width: 720px; margin: 0 auto; padding: 0 0.8rem; display: none; }
+  .player-wrap.active { display: block; }
+  .player-container { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  .player-header { display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 0.8rem; background: var(--bg-card); border-bottom: 1px solid var(--border); }
+  .player-channel { font-size: 0.82rem; font-weight: 700; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem; min-width: 0; }
+  .player-channel .live-dot { width: 8px; height: 8px; background: #ef4444; border-radius: 50%; flex-shrink: 0; animation: pulse-dot 1.5s ease-in-out infinite; }
+  @keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .player-channel .ch-label { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .player-close { width: 28px; height: 28px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg-deep); color: var(--text-dim); font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.15s; line-height: 1; }
+  .player-close:hover { background: var(--accent-blue); color: #fff; border-color: var(--accent-blue); }
+  .player-video-wrap { position: relative; width: 100%; padding-top: 56.25%; background: #000; }
+  .player-video-wrap video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000; }
+  .player-loading { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: var(--text-dim); font-size: 0.8rem; text-align: center; pointer-events: none; }
+  .player-loading .spinner { width: 32px; height: 32px; border: 3px solid var(--border); border-top-color: var(--accent-red); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 0.5rem; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .player-meta { padding: 0.5rem 0.8rem; min-height: 0; border-top: 1px solid var(--border); transition: all 0.2s; }
+  .player-meta:empty { display: none; }
+  .player-meta .meta-program { font-size: 0.78rem; font-weight: 600; color: var(--text-primary); }
+  .player-meta .meta-tag { display: inline-block; padding: 0.1rem 0.4rem; border-radius: 3px; font-size: 0.6rem; font-weight: 600; margin-top: 0.3rem; margin-right: 0.3rem; }
+  .player-meta .meta-tag.res { background: rgba(34,211,238,0.12); color: var(--accent-cyan); }
+  .player-meta .meta-tag.cat { background: rgba(168,85,247,0.12); color: var(--accent-purple); }
+  .player-error { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #f87171; font-size: 0.8rem; text-align: center; pointer-events: none; display: none; }
+
+  .list-header { max-width: 720px; margin: 0 auto; padding: 0.4rem 1.2rem; display: flex; justify-content: space-between; align-items: center; }
+  .list-header .showing { font-size: 0.75rem; color: var(--text-dim); letter-spacing: 0.03em; }
+  .list-header .showing strong { color: var(--accent-cyan); font-weight: 700; }
+  .channel-list { max-width: 720px; margin: 0 auto; padding: 0 0.8rem 4rem; }
+  .group-label { padding: 0.8rem 0.6rem 0.3rem; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-red); border-bottom: 1px solid var(--border); margin-bottom: 0.2rem; position: sticky; top: 0; background: var(--bg-deep); z-index: 5; }
+  .channel-item { display: flex; align-items: center; gap: 0.7rem; padding: 0.6rem; border-radius: 8px; cursor: pointer; transition: background 0.15s; text-decoration: none; color: inherit; }
+  .channel-item:hover { background: var(--bg-hover); }
+  .ch-icon { width: 36px; height: 36px; border-radius: 6px; background: var(--bg-card); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; color: var(--accent-red); flex-shrink: 0; text-transform: uppercase; overflow: hidden; }
+  .ch-info { flex: 1; min-width: 0; }
+  .ch-name { font-size: 0.85rem; font-weight: 600; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ch-meta { font-size: 0.68rem; color: var(--text-dim); margin-top: 0.1rem; display: flex; gap: 0.5rem; align-items: center; }
+  .ch-res { color: var(--accent-cyan); font-weight: 600; }
+  .ch-tag { background: rgba(168,85,247,0.15); color: var(--accent-purple); padding: 0.1rem 0.35rem; border-radius: 3px; font-size: 0.6rem; font-weight: 600; }
+  .ch-play { width: 28px; height: 28px; border-radius: 50%; background: var(--accent-red); display: flex; align-items: center; justify-content: center; flex-shrink: 0; opacity: 0; transform: scale(0.8); transition: all 0.15s; }
+  .ch-play svg { width: 12px; height: 12px; fill: #fff; margin-left: 1px; }
+  .channel-item:hover .ch-play { opacity: 1; transform: scale(1); }
+  .no-results { text-align: center; padding: 3rem 1rem; color: var(--text-dim); font-size: 0.9rem; }
+  .no-results .big { font-size: 2rem; margin-bottom: 0.5rem; }
+  .btt { position: fixed; bottom: 1.2rem; right: 1.2rem; width: 40px; height: 40px; border-radius: 50%; background: var(--accent-red); border: none; color: #fff; font-size: 1.2rem; cursor: pointer; box-shadow: 0 4px 16px rgba(239,68,68,0.4); opacity: 0; transform: translateY(10px); transition: all 0.25s; z-index: 20; }
+  .btt.visible { opacity: 1; transform: translateY(0); }
+  ::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-track { background: var(--bg-deep); } ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  @media (max-width: 480px) { .cat-btn { padding: 0.4rem 0.7rem; font-size: 0.7rem; } .cat-btn .badge { display: none; } .ch-icon { width: 32px; height: 32px; font-size: 0.6rem; } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1><span class="flag">&#127475;&#127476;</span> Universe Spilleliste</h1>
+  <div class="count">114 Kanaler - Norge</div>
+  <a href="index.html" class="lang-switch">&#127468;&#127463; English</a>
+  <a href="https://github.com/GreyHammond/UniversalTVPlaylist" target="_blank" rel="noopener" class="gh-link">
+    <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+    GitHub
+  </a>
+</div>
+
+<div class="help-banner">
+  <button class="help-toggle" id="helpToggle" onclick="this.classList.toggle('open');document.getElementById('helpContent').classList.toggle('open')">
+    <span>&#10067;</span> Hvordan bruker jeg dette? <span class="arrow">&#9660;</span>
+  </button>
+  <div class="help-content" id="helpContent">
+    <div class="help-card">
+      <p>Klikk pa en kanal for a spille den direkte i nettleseren. Du kan ogsa kopiere en kanallenke og apne den i din favoritt mediespiller. Vi anbefaler <strong>VLC</strong>. Helt gratis, ingen reklame, og tilgjengelig pa alle enheter.</p>
+      <div class="vlc-label">Last ned VLC Mediespiller</div>
+      <div class="vlc-links">
+        <a href="https://get.videolan.org/vlc/3.0.23/win32/vlc-3.0.23-win32.exe"><span class="dl-icon">&#x1fa9f;</span> Windows</a>
+        <a href="https://get.videolan.org/vlc/3.0.23/macosx/vlc-3.0.23-intel64.dmg"><span class="dl-icon">&#x1f34e;</span> MacOS</a>
+        <a href="https://apps.apple.com/us/app/vlc-media-player/id650377962"><span class="dl-icon">&#x1f4f1;</span> iOS</a>
+        <a href="https://play.google.com/store/apps/details?id=org.videolan.vlc"><span class="dl-icon">&#x1f916;</span> Android</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="search-wrap">
+  <input type="text" id="search" placeholder="Sok etter kanaler..." autocomplete="off">
+</div>
+
+<div class="cat-bar" id="catBar"></div>
+<div class="subcat-bar hidden" id="subBar"></div>
+
+<div class="player-wrap" id="playerWrap">
+  <div class="player-container">
+    <div class="player-header">
+      <div class="player-channel">
+        <div class="live-dot"></div>
+        <span class="ch-label" id="playerLabel">Kanalnavn</span>
+      </div>
+      <button class="player-close" id="playerClose" title="Lukk spiller">&times;</button>
+    </div>
+    <div class="player-video-wrap">
+      <video id="playerVideo" controls autoplay playsinline></video>
+      <div class="player-loading" id="playerLoading"><div class="spinner"></div>Laster strommen...</div>
+      <div class="player-error" id="playerError">Strommen er utilgjengelig</div>
+    </div>
+    <div class="player-meta" id="playerMeta"></div>
+  </div>
+</div>
+
+<div class="list-header">
+  <span class="showing" id="showingLabel">Viser <strong>114</strong> kanaler</span>
+</div>
+
+<div class="channel-list" id="channelList"></div>
+
+<button class="btt" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+<script>
+var DATA = {"UNDERHOLDNING":{"Komedie & Sitcom":[{"name":"7th Heaven","url":"https://jmp2.uk/plu-6728ca75529ac9000830ab14.m3u8"},{"name":"Beavis and Butt-Head","url":"https://jmp2.uk/plu-6486e8328e3c0a0008e5686c.m3u8"},{"name":"Becker","url":"https://jmp2.uk/plu-672e1634e482950008c759a5.m3u8"},{"name":"Broad City","url":"https://jmp2.uk/plu-65cba778ec452d0008acbe86.m3u8"},{"name":"Caroline in the City","url":"https://jmp2.uk/plu-66a7aac9d512590008ab2dcb.m3u8"},{"name":"Chappelle's Show","url":"https://jmp2.uk/plu-65e977a618036500082ec972.m3u8"},{"name":"Cheers","url":"https://jmp2.uk/plu-63e389dcc111bc0008ee5b8c.m3u8"},{"name":"Crazy Ex-Girlfriend","url":"https://jmp2.uk/plu-693ae58fc2d0f38be38df821.m3u8"},{"name":"Everybody Hates Chris","url":"https://jmp2.uk/plu-697b5a6c9567bf7b5f71a350.m3u8"},{"name":"Family Ties","url":"https://jmp2.uk/plu-654a4f7bf9cc8200086877d5.m3u8"},{"name":"Happy Days","url":"https://jmp2.uk/plu-654a508d986ad20008a456a5.m3u8"},{"name":"House of Lies","url":"https://jmp2.uk/plu-693ae65fab5959c036fa6c1e.m3u8"},{"name":"Key & Peele","url":"https://jmp2.uk/plu-65cba7573ba51e00084d76e1.m3u8"},{"name":"Man with a Plan","url":"https://jmp2.uk/plu-6825eeeeb19ce6d4a34ebb2a.m3u8"},{"name":"South Park","url":"https://jmp2.uk/plu-61c1e88cd168ea0007068133.m3u8"},{"name":"South Park Armageddon","url":"https://jmp2.uk/plu-660bff5724e1d000085b7c07.m3u8"},{"name":"South Park Rockin' Out","url":"https://jmp2.uk/plu-664f1370f78a8500092df452.m3u8"},{"name":"South Park: Butters Collection","url":"https://jmp2.uk/plu-65d87fcb66eec8000887f4aa.m3u8"},{"name":"South Park: Cartman Collection","url":"https://jmp2.uk/plu-65d87fa0f7f0af0008b2358b.m3u8"},{"name":"South Park: Into the Stars","url":"https://jmp2.uk/plu-664f0ecc41af640008e37b43.m3u8"},{"name":"South Park: Kenny Collection","url":"https://jmp2.uk/plu-65d87f53ec9fda0008a5b810.m3u8"},{"name":"South Park: Kyle Collection","url":"https://jmp2.uk/plu-65d88004ec9fda0008a5b8b3.m3u8"},{"name":"South Park: Stan Collection","url":"https://jmp2.uk/plu-65d87f7a28730900088e7fbf.m3u8"},{"name":"The Daily Show","url":"https://jmp2.uk/plu-65c0973311ced7000808d255.m3u8"},{"name":"The Millers","url":"https://jmp2.uk/plu-69afef233bd16a4ed07108e9.m3u8"}],"Reality":[{"name":"America's Next Top Model","url":"https://jmp2.uk/plu-6464cd7c7cb4b100086c71c9.m3u8"},{"name":"Are You The One?","url":"https://jmp2.uk/plu-61c1db8ed6d97900076ea15c.m3u8"},{"name":"Auction Hunters","url":"https://jmp2.uk/plu-62da7159ca8f220008032730.m3u8"},{"name":"Bondi Rescue (720p)","url":"https://jmp2.uk/plu-660d67c419ca71000849a4e9.m3u8"},{"name":"Britain's Next Top Model","url":"https://jmp2.uk/plu-67a09e25c070cf00083c40fa.m3u8"},{"name":"Car Chase (720p)","url":"https://jmp2.uk/plu-65a93b870c7ff50008d1ca47.m3u8"},{"name":"Dating Naked UK","url":"https://jmp2.uk/plu-692edcff77f0147d69f19498.m3u8"},{"name":"Ex On The Beach","url":"https://jmp2.uk/plu-61c1d66518447e000717e4c2.m3u8"},{"name":"Geordie Shore","url":"https://jmp2.uk/plu-64424a1d5a0cd500083ed27c.m3u8"},{"name":"Jersey Shore","url":"https://jmp2.uk/plu-64424b21e1979c0008379681.m3u8"},{"name":"Jersey Shore Family Vacation","url":"https://jmp2.uk/plu-6728c87cc7626f0008b28149.m3u8"},{"name":"MTV Catfish","url":"https://jmp2.uk/plu-61781a52a3638a00078fa57e.m3u8"},{"name":"MTV Dating (720p)","url":"https://jmp2.uk/plu-685140bd21f49d1b9d177e21.m3u8"},{"name":"MTV Reality","url":"https://jmp2.uk/plu-68513950f212bedacf8ec48f.m3u8"},{"name":"MTV Ridiculousness (720p)","url":"https://jmp2.uk/plu-62cd9e0d10bb020007005628.m3u8"},{"name":"MTV Teen Mom (720p)","url":"https://jmp2.uk/plu-61c1df62b7672a0007b6c9ba.m3u8"},{"name":"Paradise Hotel","url":"https://jmp2.uk/plu-61c1db901346480007b7c345.m3u8"},{"name":"Pimp My Ride","url":"https://jmp2.uk/plu-61c1d6e1f5acaf0007f8381d.m3u8"},{"name":"Reno 911","url":"https://jmp2.uk/plu-65e977874e01740008c9fb4c.m3u8"},{"name":"Ridiculousness Nye episoder","url":"https://jmp2.uk/plu-68dfa1a7fae18f8db6218222.m3u8"},{"name":"The Hills","url":"https://jmp2.uk/plu-61c1d56f28e94c0007827bdb.m3u8"},{"name":"Tosh.0","url":"https://jmp2.uk/plu-65e977c48b24c8000805b9ef.m3u8"}],"Musikk & MTV":[{"name":"Best of MTV","url":"https://jmp2.uk/plu-632afc466699570007ed1106.m3u8"},{"name":"BET","url":"https://jmp2.uk/plu-61dd5bf8db0b8e00080804ff.m3u8"}],"Talkshow & Drama":[{"name":"Best of The Drew Barrymore Show","url":"https://jmp2.uk/plu-630478cfdb5a4a0007ec255e.m3u8"},{"name":"The L Word","url":"https://jmp2.uk/plu-693ae4b616c2bba998852c21.m3u8"}],"Norsk & Nordisk":[{"name":"Boligjakten","url":"https://jmp2.uk/plu-61c1dc21b9587d0007e3fc15.m3u8"},{"name":"Boligkjøp i blinde","url":"https://jmp2.uk/plu-63c6a1c46d126a000760b91c.m3u8"},{"name":"Camp Kulinaris","url":"https://jmp2.uk/plu-61c1dce2fb9ae40007d0ac15.m3u8"},{"name":"Charterfeber","url":"https://jmp2.uk/plu-61c1dda0fe470d00080f85b8.m3u8"},{"name":"Eventyrlig Oppussing","url":"https://jmp2.uk/plu-61c1de93244e500007581d69.m3u8"},{"name":"Luksusfellen","url":"https://jmp2.uk/plu-61c1e060197fe600073c1ffb.m3u8"},{"name":"Luksusfellen Sverige","url":"https://jmp2.uk/plu-61c1e0f1d6d97900076ea16f.m3u8"},{"name":"McLeods døtre & Grantchester","url":"https://jmp2.uk/plu-65ba4db63ef47d000837b535.m3u8"},{"name":"Merry Christmas from Viafree","url":"https://jmp2.uk/plu-63047bd6b0726b000795341d.m3u8"},{"name":"Nordisk krim fra Viaplay","url":"https://jmp2.uk/plu-64eca23c9c1e390008524ae6.m3u8"},{"name":"Skjønnhetsfellen Danmark","url":"https://jmp2.uk/plu-643810f2e8a4aa0008ccf575.m3u8"},{"name":"Svenske Truckers","url":"https://jmp2.uk/plu-645cc855e1979c000875ee47.m3u8"},{"name":"Unga Mammor","url":"https://jmp2.uk/plu-61c1e1c445b45d0007aad03e.m3u8"}],"Drama & Krim":[{"name":"Bull","url":"https://jmp2.uk/plu-6964b9b97d2afdec4f9390f6.m3u8"},{"name":"Diagnosis Murder","url":"https://jmp2.uk/plu-668bf91208d5490008065ffd.m3u8"},{"name":"Doc Martin","url":"https://jmp2.uk/plu-62724ae034f5190007b63424.m3u8"},{"name":"JAG","url":"https://jmp2.uk/plu-654a4fc753fc9700083ae79f.m3u8"},{"name":"Judge Judy","url":"https://jmp2.uk/plu-6380c428dd0f47000799907c.m3u8"},{"name":"MacGyver","url":"https://jmp2.uk/plu-654a59d483595c0008187514.m3u8"},{"name":"Matlock","url":"https://jmp2.uk/plu-66290b7523e24f000832cc17.m3u8"},{"name":"Medium","url":"https://jmp2.uk/plu-68f0f602a362b63a8df4efb4.m3u8"},{"name":"Mission Impossible","url":"https://jmp2.uk/plu-639b4eb4da3fda0008036f6e.m3u8"},{"name":"Numb3rs","url":"https://jmp2.uk/plu-63dbe78051f5d000083e9249.m3u8"},{"name":"Scorpion","url":"https://jmp2.uk/plu-63a1c959d9dd51000825d659.m3u8"},{"name":"The New Detectives","url":"https://jmp2.uk/plu-6181511c1e13690007b143c2.m3u8"},{"name":"The Twilight Zone","url":"https://jmp2.uk/plu-6512d3a0bdcb19000799cc82.m3u8"},{"name":"Wildfire","url":"https://jmp2.uk/plu-62beb7d7fbf54600076abc7b.m3u8"}],"Motor":[{"name":"Pluto TV Motor","url":"https://jmp2.uk/plu-68ac52b05190a45dc990ee39.m3u8"}],"True Crime":[{"name":"Pluto TV True Crime","url":"https://jmp2.uk/plu-61c1e51354d923000731bf78.m3u8"}],"Dokumentar":[{"name":"Pluto TV Verdenskrigene","url":"https://jmp2.uk/plu-677d3a424bd63600082f7baf.m3u8"}],"Klassikere":[{"name":"Rawhide","url":"https://jmp2.uk/plu-6964baa63dfd98e10945ac51.m3u8"},{"name":"Star Trek: The Original Series","url":"https://jmp2.uk/plu-693addd62bf6cf7414c4b2fc.m3u8"},{"name":"The Wild Wild West","url":"https://jmp2.uk/plu-6964bca2a6c400fd418854a2.m3u8"}]},"FILM":{"Film":[{"name":"NonStop Kung Fu","url":"https://jmp2.uk/plu-6728d30cdaad7f000881d979.m3u8"},{"name":"Pluto TV Film","url":"https://jmp2.uk/plu-61c1e1e55deef000075aed0c.m3u8"},{"name":"Pluto TV Harlequin","url":"https://jmp2.uk/plu-68c01b9a6bdcf3b9a64febcc.m3u8"},{"name":"Pluto TV Klassiske tegnefilmer (720p)","url":"https://jmp2.uk/plu-67f508f68ddd60c57dc44766.m3u8"},{"name":"Pluto TV Kultfilmer","url":"https://jmp2.uk/plu-63dbe80f60bc8f0008aa7c78.m3u8"},{"name":"Pluto TV Romantikk","url":"https://jmp2.uk/plu-63a19bb5e6914b000721b5c0.m3u8"},{"name":"Pluto TV Tegnefilm (720p)","url":"https://jmp2.uk/plu-61c1e914bf8c520007a93ff1.m3u8"},{"name":"Star Trek Movies","url":"https://jmp2.uk/plu-6400c228498393000878a9b7.m3u8"},{"name":"Viafree Movies","url":"https://jmp2.uk/plu-62beb44e3afd120007915d1b.m3u8"}],"Action":[{"name":"Pluto TV Action","url":"https://jmp2.uk/plu-61c1e270489a9c000874d209.m3u8"}],"Komedie":[{"name":"Pluto TV Bud & Terence","url":"https://jmp2.uk/plu-65b916ec3af63d00084c5841.m3u8"},{"name":"Pluto TV Komedie","url":"https://jmp2.uk/plu-61c1e3a679a4390007c78136.m3u8"}],"Skrekk & Overnaturlig":[{"name":"Pluto TV Horror","url":"https://jmp2.uk/plu-63a19cb7847a090007f230d7.m3u8"},{"name":"Pluto TV Overnaturlig","url":"https://jmp2.uk/plu-61c1e74354d923000731bf7c.m3u8"}],"Western":[{"name":"Pluto TV John Wayne","url":"https://jmp2.uk/plu-655ca99dfbc15b00081f209c.m3u8"},{"name":"Pluto TV Wild West","url":"https://jmp2.uk/plu-68c01785b3900870ec7480e4.m3u8"}],"Sci-Fi":[{"name":"Pluto TV Sci-Fi","url":"https://jmp2.uk/plu-61f957e051cca800076f2358.m3u8"}]},"BARN":{"Barn & Ungdom":[{"name":"iCarly","url":"https://jmp2.uk/plu-61c1d9b31a9c310008f8ee57.m3u8"},{"name":"Pluto TV Juniorklubben (720p)","url":"https://jmp2.uk/plu-61c1d459fbb4b50007d24647.m3u8"},{"name":"Pluto TV Ungdomsserier (720p)","url":"https://jmp2.uk/plu-67f3fb7d07d2ba4121bd0c8b.m3u8"},{"name":"Sabrina the Teenage Witch","url":"https://jmp2.uk/plu-6512d3c96a84140008513ff5.m3u8"},{"name":"SvampeBob Firkant (720p)","url":"https://jmp2.uk/plu-61c1d59a244e500007581861.m3u8"},{"name":"Totally Turtles (720p)","url":"https://jmp2.uk/plu-61c1da718a80a4000704013e.m3u8"}]},"SPORT":{"Sport":[{"name":"Canal Motor (720p)","url":"https://digicom.hls.iptvdc.com/canalmotor/index.m3u8"},{"name":"Dallas Cowboys Cheerleaders","url":"https://jmp2.uk/plu-64e77016324d190008291c13.m3u8"},{"name":"Pluto TV Snooker 900 (720p)","url":"https://jmp2.uk/plu-68ac55fe3efb41cd979a6877.m3u8"},{"name":"Pluto TV Sport","url":"https://jmp2.uk/plu-6357f33cb51d2d00077927c6.m3u8"}]},"REGIONALT":{"Lokal-TV":[{"name":"Frikanalen (720p)","url":"https://frikanalen.no/stream/index.m3u8"},{"name":"TV Modum (720p)","url":"https://cdn010.panaccess.com/5677_streams/TVMODUM/index.m3u8"},{"name":"TV Østfold (1080p)","url":"https://streamnorge.com:8088/hls/tvo.m3u8"}]}};
+
+var CAT_META = {
+  UNDERHOLDNING: { icon: '\ud83d\udcfa', label: 'Underholdning', order: 0 },
+  FILM:          { icon: '\ud83c\udfac', label: 'Film', order: 1 },
+  BARN:          { icon: '\ud83e\uddf8', label: 'Barn', order: 2 },
+  SPORT:         { icon: '\ud83c\udfc6', label: 'Sport', order: 3 },
+  REGIONALT:     { icon: '\ud83c\udfe0', label: 'Regionalt', order: 4 },
+};
+
+var SUBCAT_ORDER = {
+  UNDERHOLDNING: ['Norsk & Nordisk','Komedie & Sitcom','Reality','Drama & Krim','Klassikere','Musikk & MTV','Talkshow & Drama','Motor','True Crime','Dokumentar','Generelt'],
+  FILM: ['Film','Action','Komedie','Skrekk & Overnaturlig','Western','Sci-Fi'],
+  BARN: ['Barn & Ungdom'],
+  SPORT: ['Sport'],
+  REGIONALT: ['Lokal-TV'],
+};
+
+var activeCat = null, activeSub = null, searchQuery = '';
+
+var allChannels = [];
+for (var cat in DATA) { for (var sub in DATA[cat]) { for (var i=0;i<DATA[cat][sub].length;i++) { var ch=DATA[cat][sub][i]; allChannels.push({name:ch.name,url:ch.url,category:cat,subcategory:sub}); }}}
+
+function parseName(raw) {
+  var name=raw,res=null,geo=false;
+  var m=name.match(/\((\d+p)\)/); if(m){res=m[1];name=name.replace(m[0],'').trim();}
+  if(name.indexOf('[Geo-blocked]')>=0){geo=true;name=name.replace('[Geo-blocked]','').trim();}
+  return {name:name,res:res,geo:geo};
+}
+function abbrev(name) {
+  var words=name.replace(/[^a-zA-Z0-9\s]/g,'').split(/\s+/).filter(Boolean);
+  if(words.length===1) return words[0].substring(0,3).toUpperCase();
+  return words.slice(0,3).map(function(w){return w[0];}).join('').toUpperCase();
+}
+
+function renderCatBar() {
+  var bar=document.getElementById('catBar');
+  var cats=Object.keys(CAT_META).sort(function(a,b){return CAT_META[a].order-CAT_META[b].order;});
+  var html='<button class="cat-btn '+(activeCat===null?'active':'')+'" data-cat="ALL"><span class="icon">\ud83d\udce1</span> ALLE <span class="badge">'+allChannels.length+'</span></button>';
+  for(var i=0;i<cats.length;i++){var cat=cats[i]; if(!DATA[cat])continue; var count=0; for(var s in DATA[cat]) count+=DATA[cat][s].length;
+    html+='<button class="cat-btn '+(activeCat===cat?'active':'')+'" data-cat="'+cat+'"><span class="icon">'+CAT_META[cat].icon+'</span> '+CAT_META[cat].label+' <span class="badge">'+count+'</span></button>';}
+  bar.innerHTML=html;
+  bar.querySelectorAll('.cat-btn').forEach(function(btn){btn.addEventListener('click',function(){activeCat=btn.dataset.cat==='ALL'?null:btn.dataset.cat;activeSub=null;renderCatBar();renderSubBar();renderList();});});
+}
+function renderSubBar() {
+  var bar=document.getElementById('subBar');
+  if(!activeCat||!DATA[activeCat]){bar.classList.add('hidden');bar.innerHTML='';return;}
+  bar.classList.remove('hidden');
+  var subs=Object.keys(DATA[activeCat]),order=SUBCAT_ORDER[activeCat]||subs;
+  var sorted=[].concat(subs).sort(function(a,b){var ai=order.indexOf(a),bi=order.indexOf(b);return(ai===-1?999:ai)-(bi===-1?999:bi);});
+  var html='<button class="sub-btn '+(activeSub===null?'active':'')+'" data-sub="ALL">Alle</button>';
+  for(var i=0;i<sorted.length;i++){var sub=sorted[i],count=DATA[activeCat][sub].length;
+    html+='<button class="sub-btn '+(activeSub===sub?'active':'')+'" data-sub="'+sub+'">'+sub+' <span style="opacity:0.6">'+count+'</span></button>';}
+  bar.innerHTML=html;
+  bar.querySelectorAll('.sub-btn').forEach(function(btn){btn.addEventListener('click',function(){activeSub=btn.dataset.sub==='ALL'?null:btn.dataset.sub;renderSubBar();renderList();});});
+}
+function renderList() {
+  var container=document.getElementById('channelList'),label=document.getElementById('showingLabel');
+  var q=searchQuery.toLowerCase().trim();
+  var filtered=allChannels;
+  if(activeCat) filtered=filtered.filter(function(c){return c.category===activeCat;});
+  if(activeSub) filtered=filtered.filter(function(c){return c.subcategory===activeSub;});
+  if(q) filtered=filtered.filter(function(c){return c.name.toLowerCase().indexOf(q)>=0;});
+  label.innerHTML='Viser <strong>'+filtered.length+'</strong> kanal'+(filtered.length!==1?'er':'');
+  if(filtered.length===0){container.innerHTML='<div class="no-results"><div class="big">\ud83d\udce1</div>Ingen kanaler funnet</div>';return;}
+  var groups=new Map();
+  for(var i=0;i<filtered.length;i++){var ch=filtered[i],key; if(activeCat&&!q){key=ch.subcategory;}else{key=(CAT_META[ch.category]?CAT_META[ch.category].icon:'')+' '+((CAT_META[ch.category]||{}).label||ch.category);}
+    if(!groups.has(key))groups.set(key,[]); groups.get(key).push(ch);}
+  var sortedKeys;
+  if(activeCat&&!q){var order=SUBCAT_ORDER[activeCat]||[];sortedKeys=[].concat(Array.from(groups.keys())).sort(function(a,b){var ai=order.indexOf(a),bi=order.indexOf(b);return(ai===-1?999:ai)-(bi===-1?999:bi);});}
+  else{var catOrder=Object.keys(CAT_META);sortedKeys=[].concat(Array.from(groups.keys())).sort(function(a,b){var ac=catOrder.findIndex(function(c){return a.indexOf((CAT_META[c]||{}).label||'')>=0;});var bc=catOrder.findIndex(function(c){return b.indexOf((CAT_META[c]||{}).label||'')>=0;});return ac-bc;});}
+  var html='';
+  for(var k=0;k<sortedKeys.length;k++){var key=sortedKeys[k],items=groups.get(key);
+    html+='<div class="group-label">'+key+' \u00b7 '+items.length+'</div>';
+    for(var j=0;j<items.length;j++){var ch=items[j],p=parseName(ch.name),ab=abbrev(p.name);
+      var safeUrl=ch.url.replace(/'/g,"\\'"),safeName=ch.name.replace(/'/g,"\\'"),safeSub=ch.subcategory.replace(/'/g,"\\'");
+      html+='<div class="channel-item" onclick="playChannel(\''+safeName+'\',\''+safeUrl+'\',\''+safeSub+'\')">'
+        +'<div class="ch-icon">'+ab+'</div><div class="ch-info"><div class="ch-name">'+p.name+'</div><div class="ch-meta">'
+        +(p.res?'<span class="ch-res">'+p.res+'</span>':'')+'<span class="ch-tag">'+ch.subcategory+'</span>'
+        +(p.geo?'<span class="ch-geo">Geo-blokkert</span>':'')+'</div></div>'
+        +'<div class="ch-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>';}}
+  container.innerHTML=html;
+}
+document.getElementById('search').addEventListener('input',function(e){searchQuery=e.target.value;if(searchQuery.trim()){activeCat=null;activeSub=null;renderCatBar();renderSubBar();}renderList();});
+window.addEventListener('scroll',function(){document.getElementById('btt').classList.toggle('visible',window.scrollY>600);});
+renderCatBar();renderSubBar();renderList();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.17/dist/hls.min.js"></script>
+<script>
+var playerWrap=document.getElementById('playerWrap'),playerVideo=document.getElementById('playerVideo'),playerLabel=document.getElementById('playerLabel'),playerLoading=document.getElementById('playerLoading'),playerError=document.getElementById('playerError'),playerMeta=document.getElementById('playerMeta'),playerClose=document.getElementById('playerClose');
+var currentHls=null;
+function playChannel(name,url,subcategory){
+  playerWrap.classList.add('active');playerLoading.style.display='block';playerError.style.display='none';playerMeta.innerHTML='';
+  var resMatch=name.match(/\((\d+p)\)/);var cleanName=name.replace(/\s*\(\d+p\)/,'').replace(/\s*\[.*?\]/g,'').trim();
+  playerLabel.textContent=cleanName;
+  var metaHtml='';if(resMatch)metaHtml+='<span class="meta-tag res">'+resMatch[1]+'</span>';if(subcategory)metaHtml+='<span class="meta-tag cat">'+subcategory+'</span>';playerMeta.innerHTML=metaHtml;
+  if(currentHls){currentHls.destroy();currentHls=null;}playerVideo.src='';
+  playerWrap.scrollIntoView({behavior:'smooth',block:'nearest'});
+  if(typeof Hls!=='undefined'&&Hls.isSupported()){
+    var hls=new Hls({enableWorker:true,lowLatencyMode:false,maxBufferLength:30,maxMaxBufferLength:60});currentHls=hls;hls.loadSource(url);hls.attachMedia(playerVideo);
+    hls.on(Hls.Events.MANIFEST_PARSED,function(){playerLoading.style.display='none';playerVideo.play().catch(function(){});});
+    hls.on(Hls.Events.ERROR,function(event,data){if(data.fatal){playerLoading.style.display='none';playerError.style.display='block';
+      if(data.type===Hls.ErrorTypes.NETWORK_ERROR)playerError.textContent='Nettverksfeil - strommen kan vaere geo-blokkert eller offline';
+      else if(data.type===Hls.ErrorTypes.MEDIA_ERROR){playerError.textContent='Mediefeil - prover a gjenopprette...';hls.recoverMediaError();}
+      else playerError.textContent='Strommen er utilgjengelig';}});
+    hls.on(Hls.Events.FRAG_PARSING_METADATA,function(event,data){if(data.samples){for(var i=0;i<data.samples.length;i++){try{var text=parseID3(data.samples[i].data);if(text)updateMeta(text,resMatch,subcategory);}catch(e){}}}});
+  }else if(playerVideo.canPlayType('application/vnd.apple.mpegurl')){
+    playerVideo.src=url;playerVideo.addEventListener('loadedmetadata',function(){playerLoading.style.display='none';playerVideo.play().catch(function(){});},{once:true});
+    playerVideo.addEventListener('error',function(){playerLoading.style.display='none';playerError.style.display='block';playerError.textContent='Strommen er utilgjengelig';},{once:true});
+  }else{playerLoading.style.display='none';playerError.style.display='block';playerError.textContent='HLS stettes ikke i denne nettleseren';}
+}
+function parseID3(data){try{var bytes=new Uint8Array(data);var str=new TextDecoder('utf-8',{fatal:false}).decode(bytes);var matches=str.match(/[A-Za-z][\w\s:',.-!?&()]{10,}/g);if(matches){var clean=matches.filter(function(m){return!/^[A-Z]{4}\d/.test(m);}).sort(function(a,b){return b.length-a.length;});return clean[0]||null;}}catch(e){}return null;}
+function updateMeta(text,resMatch,subcategory){if(!text||text.length<5)return;var d=document.createElement('div');d.textContent=text;var html='<div class="meta-program">'+d.innerHTML+'</div><div style="margin-top:0.3rem">';if(resMatch)html+='<span class="meta-tag res">'+resMatch[1]+'</span>';if(subcategory)html+='<span class="meta-tag cat">'+subcategory+'</span>';html+='</div>';playerMeta.innerHTML=html;}
+playerClose.addEventListener('click',function(){playerWrap.classList.remove('active');if(currentHls){currentHls.destroy();currentHls=null;}playerVideo.src='';playerVideo.pause();});
+</script>
+</body>
+</html>
